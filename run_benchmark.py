@@ -40,15 +40,9 @@ def test_duck_db():
     # To perform SQL commands
     c = con.cursor()
 
-    # c.execute("CREATE TABLE sensors(id INTEGER, type VARCHAR(20), location VARCHAR(30))")
-    # c.execute("INSERT INTO sensors VALUES (1, 'a', 'floor')")
-    # c.execute("INSERT INTO sensors VALUES (3, 'b', 'ceiling')")
-
     # Create Statements
     s = time()
-    # c.execute("CREATE TABLE sensors(id INTEGER NOT NULL, type VARCHAR(20), location VARCHAR(30), PRIMARY KEY(id))")
     c.execute("CREATE TABLE sensors(id INTEGER PRIMARY KEY NOT NULL, type VARCHAR(20), location VARCHAR(30))")
-    # c.execute("CREATE TABLE sensor_data(s_id INTEGER NOT NULL, temp DOUBLE, cpu DOUBLE, FOREIGN KEY(s_id) REFERENCES sensors(id))")
     c.execute("CREATE TABLE sensor_data(s_id INTEGER NOT NULL, temp DOUBLE, cpu DOUBLE)")
     st = time()
     result.create = st - s
@@ -123,19 +117,13 @@ def test_mysql_db():
     # To perform SQL commands
     c = mydb.cursor(buffered=True)
 
-    # c.execute("CREATE TABLE sensors(id INTEGER, type VARCHAR(20), location VARCHAR(30))")
-    # c.execute("INSERT INTO sensors VALUES (1, 'a', 'floor')")
-    # c.execute("INSERT INTO sensors VALUES (3, 'b', 'ceiling')")
-    # c.execute("CREATE DATABASE cpsc8620;")
     c.execute("USE cpsc8620;")
     c.execute("DROP TABLE IF EXISTS sensor_data;")
     c.execute("DROP TABLE IF EXISTS sensors;")
     # Create Statements
     s = time()
     c.execute("CREATE TABLE sensors(id INTEGER NOT NULL, type VARCHAR(20), location VARCHAR(30), PRIMARY KEY(id))")
-    # c.execute("CREATE TABLE sensors(id INTEGER PRIMARY KEY NOT NULL, type VARCHAR(20), location VARCHAR(30))")
     c.execute("CREATE TABLE sensor_data(s_id INTEGER NOT NULL, temp DOUBLE, cpu DOUBLE, FOREIGN KEY(s_id) REFERENCES sensors(id))")
-    # c.execute("CREATE TABLE sensor_data(s_id INTEGER NOT NULL, temp DOUBLE, cpu DOUBLE)")
     st = time()
     result.create = st - s
 
